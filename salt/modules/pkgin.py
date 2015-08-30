@@ -126,7 +126,7 @@ def search(pkg_name):
     )
     for line in out.splitlines():
         if line:
-            match = _splitpkg(line.split(;)[0])
+            match = _splitpkg(line.split(';')[0])
             if match:
                 pkglist[match[0]] = match[1]
 
@@ -168,7 +168,7 @@ def latest_version(*names, **kwargs):
             output_loglevel='trace'
         )
         for line in out.splitlines():
-            p = line.split(;)  # pkgname-version status
+            p = line.split(';')  # pkgname-version status
             if p and p[0] in ('=:', '<:', '>:'):
                 # These are explanation comments
                 continue
