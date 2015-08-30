@@ -121,12 +121,12 @@ def search(pkg_name):
         pkg_name = '^{0}$'.format(pkg_name)
 
     out = __salt__['cmd.run'](
-        '{0} se {1}'.format(pkgin, pkg_name),
+        '{0} -p se {1}'.format(pkgin, pkg_name),
         output_loglevel='trace'
     )
     for line in out.splitlines():
         if line:
-            match = _splitpkg(line.split()[0])
+            match = _splitpkg(line.split(;)[0])
             if match:
                 pkglist[match[0]] = match[1]
 
@@ -164,11 +164,11 @@ def latest_version(*names, **kwargs):
         if _supports_regex():
             name = '^{0}$'.format(name)
         out = __salt__['cmd.run'](
-            '{0} se {1}'.format(pkgin, name),
+            '{0} -p se {1}'.format(pkgin, name),
             output_loglevel='trace'
         )
         for line in out.splitlines():
-            p = line.split()  # pkgname-version status
+            p = line.split(;)  # pkgname-version status
             if p and p[0] in ('=:', '<:', '>:'):
                 # These are explanation comments
                 continue
@@ -254,7 +254,10 @@ def list_pkgs(versions_as_list=False, **kwargs):
 
     pkgin = _check_pkgin()
     if pkgin:
-        pkg_command = '{0} -p ls'.format(pkgin)
+        if _supports_parsing():
+            pkg_command = '{0} -p ls'.format(pkgin)
+        else:
+            pkg_command = '{0} ls'.format(pkgin)
     else:
         pkg_command = 'pkg_info'
 
