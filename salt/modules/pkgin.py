@@ -254,10 +254,7 @@ def list_pkgs(versions_as_list=False, **kwargs):
 
     pkgin = _check_pkgin()
     if pkgin:
-        if _supports_parsing():
-            pkg_command = '{0} -p ls'.format(pkgin)
-        else:
-            pkg_command = '{0} ls'.format(pkgin)
+        pkg_command = '{0} -p ls'.format(pkgin)
     else:
         pkg_command = 'pkg_info'
 
