@@ -172,6 +172,8 @@ def latest_version(*names, **kwargs):
             if p and p[0] in ('=:', '<:', '>:'):
                 # These are explanation comments
                 continue
+            if len(p[0].strip())  == 0 :
+                continue
             elif p:
                 s = _splitpkg(p[0])
                 if s:
